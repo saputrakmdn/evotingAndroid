@@ -10,13 +10,15 @@ class SharePref {
         mContext = context
         sharePref = mContext.getSharedPreferences("nik", Context.MODE_PRIVATE)
     }
-    fun readSetting():String{
-        return readSetting()
+    fun readSetting(key: String):String{
+       return sharePref.getString(key, "na")
     }
     fun updateSetting(key: String, value: String){
         val editor = sharePref.edit()
         editor.putString(key, value)
         editor.apply()
-
+    }
+    fun deleteAllSetting(){
+        sharePref.edit().clear().apply()
     }
 }

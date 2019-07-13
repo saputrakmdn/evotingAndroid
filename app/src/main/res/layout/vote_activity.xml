@@ -70,6 +70,7 @@
                 android:background="#e80920"
                 android:text="Vote"
                 android:textSize="20sp"
+                android:id="@+id/vote"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
         />

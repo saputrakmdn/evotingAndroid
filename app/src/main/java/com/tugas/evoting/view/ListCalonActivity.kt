@@ -30,4 +30,9 @@ class ListCalonActivity: AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
+
 }
