@@ -19,6 +19,6 @@ class SharePref {
         editor.apply()
     }
     fun deleteAllSetting(){
-        sharePref.edit().clear().apply()
+        sharePref.edit().remove("nik").commit()
     }
 }

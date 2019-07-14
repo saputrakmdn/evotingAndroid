@@ -20,10 +20,12 @@ class DataPemilih {
     lateinit var updated_at: String
 
     constructor(){}
-    constructor(nik: String, nama: String, status_vote: String){
+    constructor(nik: String, nama: String, status_vote: String, created_at: String, updated_at: String){
         this.nik =  nik
         this.nama = nama
         this.status_vote = status_vote
+        this.created_at = created_at
+        this.updated_at = updated_at
 
     }
 }

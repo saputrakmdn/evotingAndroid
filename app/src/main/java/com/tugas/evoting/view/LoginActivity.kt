@@ -1,5 +1,6 @@
 package com.tugas.evoting.view
 
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
@@ -20,8 +21,8 @@ class LoginActivity: AppCompatActivity() {
     var etNik : EditText? = null
     var btn : Button? = null
     var ilyt: TextInputLayout? = null
-    lateinit var pemilih: List<DataPemilih>
     internal lateinit var set: SharePref
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,29 +32,36 @@ class LoginActivity: AppCompatActivity() {
         btn = findViewById(R.id.btnMasuk)
         set = SharePref(this)
         ilyt = findViewById(R.id.text_input_layout)
-//        pemilih = List<DataPemilih>()
         val viewModel = ViewModelProviders.of(this).get(DataPemilihViewModel::class.java)
-        viewModel.dataPemilih!!.observeForever{
-
+       viewModel.dataPemilih!!.observeForever{
             btn!!.setOnClickListener {
                 xx ->
-                val login = etNik!!.text.toString()
-
-                val nik = it!!.get(0).nik
-                val status = it!!.get(0).status_vote
-                val id = it!!.get(0).id
-                if (login == nik){
-                    if (status.equals("0")){
-                        Toast.makeText(this, "TES", Toast.LENGTH_SHORT).show()
-                        set.updateSetting(Const.PREF_MY_ID, id)
-                        startActivity(Intent(this, ListCalonActivity::class.java))
-                        finish()
-                    }else{
+                for (data in it!!){
+                    val login = etNik!!.text.toString()
+                    val status = data.status_vote
+                    val id = data.id
+                    val nik = data.nik
+                    if (login == nik){
+                        if (status == "0"){
+                            Toast.makeText(this, "TES", Toast.LENGTH_SHORT).show()
+                            set.updateSetting(Const.PREF_MY_ID, id)
+                            startActivity(Intent(this, ListCalonActivity::class.java))
+                            finish()
+                        }else{
+                            ilyt!!.error = "Anda Telah Melakukan vote"
+                        }
+                    }else if (status != "0"){
                         ilyt!!.error = "Anda Telah Melakukan vote"
                     }
-                }else{
-                    ilyt!!.error = "Nik Anda tidak terdaftar"
+                    else{
+                        ilyt!!.error = "Nik Anda tidak terdaftar"
+                    }
                 }
+
+//                val nik = it!!.get(0).nik
+
+                w("o", "Tes ")
+
             }
         }
     }

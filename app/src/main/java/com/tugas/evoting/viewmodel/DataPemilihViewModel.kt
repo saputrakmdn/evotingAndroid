@@ -29,7 +29,7 @@ class DataPemilihViewModel: ViewModel() {
         val getData = apiData.getDataPemilih()
         getData.enqueue(object : Callback<List<DataPemilih>>{
             override fun onFailure(call: Call<List<DataPemilih>>, t: Throwable) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
             }
 
             override fun onResponse(call: Call<List<DataPemilih>>, response: Response<List<DataPemilih>>) {

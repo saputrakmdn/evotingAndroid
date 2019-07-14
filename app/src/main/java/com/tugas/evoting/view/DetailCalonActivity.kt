@@ -32,6 +32,13 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.login_activity.*
 import kotlinx.android.synthetic.main.succes.*
 import kotlin.system.exitProcess
+import android.R.attr.prompt
+
+
+
+
+
+
 
 
 class DetailCalonActivity: AppCompatActivity() {
@@ -63,8 +70,7 @@ class DetailCalonActivity: AppCompatActivity() {
         retrofit = Retrofit.Builder().client(client).baseUrl(Const.base_url).addConverterFactory(GsonConverterFactory.create()).build()
         val postData = retrofit!!.create(ApiOnly::class.java)
         vote.setOnClickListener {
-            customDialog()
-
+            set!!.deleteAllSetting()
             postData.postVote("${id}", "${id_pemilih}").enqueue(object : Callback<Vote>{
                 override fun onFailure(call: Call<Vote>, t: Throwable) {
                     i("y", "j"+t.cause)
@@ -78,26 +84,23 @@ class DetailCalonActivity: AppCompatActivity() {
                 }
 
             })
-        }
-
-    }
-    private fun customDialog(){
-        val viewGroup = findViewById<ViewGroup>(R.id.content)
-        val dialogView = LayoutInflater.from(this).inflate(R.layout.succes, viewGroup, false)
-        val alertDialog = AlertDialog.Builder(this)
-        alertDialog.setView(dialogView).setCancelable(false)
-        val dialog = alertDialog.create()
-        dialog.show()
-    }
-
-    fun haha(view : View){
-        when(view.id){
-            R.id.buttonOk ->{
-                set!!.deleteAllSetting()
+            val layoutInflater = LayoutInflater.from(this)
+            val promptView = layoutInflater.inflate(R.layout.succes, null)
+            val alertD = AlertDialog.Builder(this).create()
+            val btn = promptView.findViewById<Button>(R.id.buttonOk)
+            btn.setOnClickListener {
                 val intent = Intent(this, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
-                exitProcess(1)
             }
+            alertD.setView(promptView)
+            alertD.show()
         }
     }
+
+
+
+
+
+
 }
