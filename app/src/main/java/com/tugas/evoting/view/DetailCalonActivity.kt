@@ -55,7 +55,7 @@ class DetailCalonActivity: AppCompatActivity() {
         val id_pemilih = set!!.readSetting(Const.PREF_MY_ID)
         val foto = intent.getStringExtra("foto")
         w("tag", "$id & $id_pemilih")
-        val fotourl = "http://172.16.10.12:8000/${foto}"
+        val fotourl = "http://172.16.10.10:8000/${foto}"
         visi.text = visicalon
         misi.text = misicalon
         calon_nama.text = nama

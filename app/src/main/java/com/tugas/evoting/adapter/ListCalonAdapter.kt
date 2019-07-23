@@ -48,7 +48,7 @@ class ListCalonAdapter: RecyclerView.Adapter<ListCalonAdapter.ListCalonViewHolde
 
     override fun onBindViewHolder(p0: ListCalonViewHolder, p1: Int) {
         val calon = listCalon[p1]
-        val urlphoto = "http://172.16.10.12:8000/${calon.foto}"
+        val urlphoto = "http://172.16.10.10:8000/${calon.foto}"
         w("tag", "tes$urlphoto")
         p0.nama.text = calon.nama
         Glide.with(mContext).load(urlphoto).apply(RequestOptions().placeholder(R.drawable.debate)).into(p0.foto)
