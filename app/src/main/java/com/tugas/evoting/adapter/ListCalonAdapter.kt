@@ -15,6 +15,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.tugas.evoting.R
 import com.tugas.evoting.model.DataCalon
 import com.tugas.evoting.view.DetailCalonActivity
+import kotlinx.android.synthetic.main.list_calon.view.*
 
 class ListCalonAdapter: RecyclerView.Adapter<ListCalonAdapter.ListCalonViewHolder> {
 
